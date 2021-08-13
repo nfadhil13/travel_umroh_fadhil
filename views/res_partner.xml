@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_partner_form_umroh">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="after">
+                    <group string="Additional Information">
+                        <group>
+                            <field name="no_ktp" />
+                            <field name="gender" />
+                            <field name="mahram" />
+                            <field name="father_name" />
+                            <field name="mother_name" />
+                        </group>
+                        <group>
+                            <field name="birth_place" />
+                            <field name="birth_date" />
+                            <field name="blood_type" />
+                            <field name="status" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>

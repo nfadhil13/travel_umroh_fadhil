@@ -1,0 +1,75 @@
+<odoo>
+    <template id="customer_invoice_report">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div>
+                        <center>
+                            <h1>Customer Invoice</h1>
+                        </center>
+                        <div class="row top-section mt-6">
+                            <div class="col-8">
+                                <div style="width:100%">Name: <t t-esc="doc.partner_id.name"/></div>
+                                <div style="width:100%">Adress: <t t-esc="doc.partner_id.street"/></div>
+                                <div style="width:100%">Phone: <t t-esc="doc.partner_id.phone"/></div>
+                            </div>
+                            <div class="col-4">
+                                <div style="width:100%">No: <t t-esc="doc.name"/></div>
+                                <div style="width:100%">Date: <t t-esc="doc.date_order"/></div>
+                            </div>
+                        </div>
+                        <table class="table mt-5 table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col" class="font-weight-bold">Product</th>
+                                <th scope="col"  class="font-weight-bold">Qty</th>
+                                <th scope="col"  class="font-weight-bold">Price Unit</th>
+                                <th scope="col"  class="font-weight-bold">Subtotal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.order_line" t-as="order">
+                                    <t t-if="order.product_uom_qty > 0.0">
+                                        <tr>
+                                            <td><t t-esc="order.product_id.name" /></td>
+                                            <td><t t-esc="order.product_uom_qty" /> </td>
+                                            <td>
+                                                <t t-esc="order.price_unit"/>
+                                             </td>
+                                            <td><t t-esc="order.price_subtotal"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <tr>
+                                    <td colspan="3"><p class="text-right" >Total: </p></td>
+                                    <td><t t-esc="doc.amount_total" /></td>
+                                </tr>
+                            </tbody>
+                          </table>
+                          <table class="table mt-5 table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="3" class="font-weight-bold">Payment</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="font-weight-bold">Method</th>
+                                    <th scope="col"  class="font-weight-bold">Date</th>
+                                    <th scope="col"  class="font-weight-bold">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.invoice_ids" t-as="invoice">
+                                    <t t-if="invoice.payment_state == 'paid'">
+                                        <td><t t-esc="invoice.journal_id.type"/></td>
+                                        <td><t t-esc="invoice.date" /></td>
+                                        <td><t t-esc="invoice.amount_total" /></td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

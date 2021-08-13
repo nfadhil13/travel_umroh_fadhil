@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+travel_package_access,travel_package_access,model_travel_package,base.group_user,1,1,1,1
+acara_line_access,acara_line_access,model_acara_line,base.group_user,1,1,1,1
+airline_line_access,airline_line_access,model_airline_line,base.group_user,1,1,1,1
+hotel_line_access,hotel_line_access,model_hotel_line,base.group_user,1,1,1,1
+peserta_line_access,peserta_line_access,model_peserta_line,base.group_user,1,1,1,1
+sale_document_access,sale_document_access,model_sale_document,base.group_user,1,1,1,1
+sale_passport_access,sale_passport_access,model_sale_passport,base.group_user,1,1,1,1

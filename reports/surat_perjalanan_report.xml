@@ -1,0 +1,63 @@
+<odoo>
+    <template id="surat_perjalanan_template">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div>
+                        <center>
+                            <h1>Delivery Order</h1>
+                        </center>
+                        <div class="row top-section mt-6">
+                            <div class="col-8">
+                                <div style="width:100%">Name: <t t-esc="doc.partner_id.name"/></div>
+                                <div style="width:100%">Adress: <t t-esc="doc.partner_id.street"/></div>
+                                <div style="width:100%">Phone: <t t-esc="doc.partner_id.phone"/></div>
+                            </div>
+                            <div class="col-4">
+                                <div style="width:100%">No: <t t-esc="doc.name"/></div>
+                                <div style="width:100%">Date: <t t-esc="doc.date_order"/></div>
+                            </div>
+                        </div>
+                        <table class="table mt-5">
+                            <thead>
+                              <tr>
+                                <th scope="col" class="font-weight-bold">Product</th>
+                                <th scope="col"  class="font-weight-bold">Qty</th>
+                                <th scope="col"  class="font-weight-bold">UoM</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.order_line" t-as="order">
+                                    <t t-if="order.product_id.product_tmpl_id.bom_count > 0">
+                                        <t t-foreach="order.product_id.product_tmpl_id.bom_ids.bom_line_ids" t-as="inner_product">
+                                            <tr>
+                                                <td><t t-esc="inner_product.product_id.name" /></td>
+                                                <td><t t-esc="inner_product.product_qty" /> </td>
+                                                <td><t t-esc="inner_product.product_uom_id.name" /></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-if="0 >= order.product_id.product_tmpl_id.bom_count ">
+                                        <tr>
+                                            <td><t t-esc="order.product_id.name" /></td>
+                                            <td><t t-esc="order.product_uom_qty" /> </td>
+                                            <td>-</td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                          </table>
+                          <center style="width:100%" class="mt-8"> 
+                            <div style="width:30%" class="border border-secondary pa-3">
+                                <p>Mengetahui</p>
+                                <div style="height:160px;'"></div>
+                                <p>Administrator</p>
+                            </div>
+                          </center>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
